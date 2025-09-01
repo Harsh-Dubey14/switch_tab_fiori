@@ -1,0 +1,67 @@
+<mvc:View
+  controllerName="tabtable.controller.View1"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <VBox id="mainVBox">
+    <SegmentedButton id="tableSwitcher" selectedKey="{view1>/selectedTable}" selectionChange="onTableSwitch">
+      <items>
+        <SegmentedButtonItem id="ledgerBtn" key="ZLEDGERSet" text="Ledger"/>
+        <SegmentedButtonItem id="vendorDetailsBtn" key="ZVEND_DETAILSSet" text="Vendor Details"/>
+      </items>
+    </SegmentedButton>
+    <Table id="ledgerTable"
+           visible="{= ${view1>/selectedTable} === 'ZLEDGERSet' }"
+           items="{
+             path: '/ZLEDGERSet'
+           }">
+      <columns>
+        <Column id="ledgerVendorCol"><Text id="ledgerVendorColTxt" text="Vendor"/></Column>
+        <Column id="ledgerNameCol"><Text id="ledgerNameColTxt" text="Name"/></Column>
+        <Column id="ledgerObalCol"><Text id="ledgerObalColTxt" text="Obalance"/></Column>
+        <Column id="ledgerDebitCol"><Text id="ledgerDebitColTxt" text="Debit"/></Column>
+        <Column id="ledgerCreditCol"><Text id="ledgerCreditColTxt" text="Credit"/></Column>
+        <Column id="ledgerCbalCol"><Text id="ledgerCbalColTxt" text="Cbalance"/></Column>
+      </columns>
+      <items>
+        <ColumnListItem id="ledgerRow">
+          <cells>
+            <Text id="ledgerVendor" text="{Lifnr}"/>
+            <Text id="ledgerName" text="{Name1}"/>
+            <Text id="ledgerObal" text="{Obalance}"/>
+            <Text id="ledgerDebit" text="{Debit}"/>
+            <Text id="ledgerCredit" text="{Credit}"/>
+            <Text id="ledgerCbal" text="{Cbalance}"/>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+    <Table id="vendorTable"
+           visible="{= ${view1>/selectedTable} === 'ZVEND_DETAILSSet' }"
+           items="{
+             path: '/ZVEND_DETAILSSet'
+           }">
+      <columns>
+        <Column id="vendVendorCol"><Text id="vendVendorColTxt" text="Vendor"/></Column>
+        <Column id="vendNameCol"><Text id="vendNameColTxt" text="Name"/></Column>
+        <Column id="vendAddrCol"><Text id="vendAddrColTxt" text="Address"/></Column>
+        <Column id="vendGSTCol"><Text id="vendGSTColTxt" text="GSTIN"/></Column>
+        <Column id="vendAmtCol"><Text id="vendAmtColTxt" text="Amount"/></Column>
+        <Column id="vendCurrCol"><Text id="vendCurrColTxt" text="Currency"/></Column>
+        <Column id="vendStatusCol"><Text id="vendStatusColTxt" text="Status"/></Column>
+      </columns>
+      <items>
+        <ColumnListItem id="vendorRow">
+          <cells>
+            <Text id="vendVendor" text="{Lifnr}"/>
+            <Text id="vendName" text="{Name}"/>
+            <Text id="vendAddr" text="{Fulladdress}"/>
+            <Text id="vendGST" text="{STCD1}"/>
+            <Text id="vendAmt" text="{Wrbtr}"/>
+            <Text id="vendCurr" text="{Waers}"/>
+            <Text id="vendStatus" text="{Status}"/>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </VBox>
+</mvc:View>
