@@ -1,10 +1,10 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "tabtable/model/models"
+    "tabtable1/model/models"
 ], (UIComponent, models) => {
     "use strict";
 
-    return UIComponent.extend("tabtable.Component", {
+    return UIComponent.extend("tabtable1.Component", {
         metadata: {
             manifest: "json",
             interfaces: [

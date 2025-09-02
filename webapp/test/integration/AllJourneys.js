@@ -7,7 +7,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "tabtable.view.",
+		viewNamespace: "tabtable1.view.",
 		autoWait: true
 	});
 });

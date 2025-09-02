@@ -1,67 +1,118 @@
 <mvc:View
-  controllerName="tabtable.controller.View1"
+  controllerName="tabtable1.controller.View1"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m">
-  <VBox id="mainVBox">
-    <SegmentedButton id="tableSwitcher" selectedKey="{view1>/selectedTable}" selectionChange="onTableSwitch">
-      <items>
-        <SegmentedButtonItem id="ledgerBtn" key="ZLEDGERSet" text="Ledger"/>
-        <SegmentedButtonItem id="vendorDetailsBtn" key="ZVEND_DETAILSSet" text="Vendor Details"/>
-      </items>
-    </SegmentedButton>
-    <Table id="ledgerTable"
-           visible="{= ${view1>/selectedTable} === 'ZLEDGERSet' }"
-           items="{
-             path: '/ZLEDGERSet'
-           }">
-      <columns>
-        <Column id="ledgerVendorCol"><Text id="ledgerVendorColTxt" text="Vendor"/></Column>
-        <Column id="ledgerNameCol"><Text id="ledgerNameColTxt" text="Name"/></Column>
-        <Column id="ledgerObalCol"><Text id="ledgerObalColTxt" text="Obalance"/></Column>
-        <Column id="ledgerDebitCol"><Text id="ledgerDebitColTxt" text="Debit"/></Column>
-        <Column id="ledgerCreditCol"><Text id="ledgerCreditColTxt" text="Credit"/></Column>
-        <Column id="ledgerCbalCol"><Text id="ledgerCbalColTxt" text="Cbalance"/></Column>
-      </columns>
-      <items>
-        <ColumnListItem id="ledgerRow">
-          <cells>
-            <Text id="ledgerVendor" text="{Lifnr}"/>
-            <Text id="ledgerName" text="{Name1}"/>
-            <Text id="ledgerObal" text="{Obalance}"/>
-            <Text id="ledgerDebit" text="{Debit}"/>
-            <Text id="ledgerCredit" text="{Credit}"/>
-            <Text id="ledgerCbal" text="{Cbalance}"/>
-          </cells>
-        </ColumnListItem>
-      </items>
-    </Table>
-    <Table id="vendorTable"
-           visible="{= ${view1>/selectedTable} === 'ZVEND_DETAILSSet' }"
-           items="{
-             path: '/ZVEND_DETAILSSet'
-           }">
-      <columns>
-        <Column id="vendVendorCol"><Text id="vendVendorColTxt" text="Vendor"/></Column>
-        <Column id="vendNameCol"><Text id="vendNameColTxt" text="Name"/></Column>
-        <Column id="vendAddrCol"><Text id="vendAddrColTxt" text="Address"/></Column>
-        <Column id="vendGSTCol"><Text id="vendGSTColTxt" text="GSTIN"/></Column>
-        <Column id="vendAmtCol"><Text id="vendAmtColTxt" text="Amount"/></Column>
-        <Column id="vendCurrCol"><Text id="vendCurrColTxt" text="Currency"/></Column>
-        <Column id="vendStatusCol"><Text id="vendStatusColTxt" text="Status"/></Column>
-      </columns>
-      <items>
-        <ColumnListItem id="vendorRow">
-          <cells>
-            <Text id="vendVendor" text="{Lifnr}"/>
-            <Text id="vendName" text="{Name}"/>
-            <Text id="vendAddr" text="{Fulladdress}"/>
-            <Text id="vendGST" text="{STCD1}"/>
-            <Text id="vendAmt" text="{Wrbtr}"/>
-            <Text id="vendCurr" text="{Waers}"/>
-            <Text id="vendStatus" text="{Status}"/>
-          </cells>
-        </ColumnListItem>
-      </items>
-    </Table>
-  </VBox>
+
+  <Page id="mainPage" title="Dashboard">
+    <content>
+
+      <!-- Tiles Container -->
+      <FlexBox
+        id="tileContainer"
+        wrap="Wrap"
+        justifyContent="Center"
+        visible="{= ${view1>/pageState} === 'tiles' }">
+
+        <GenericTile
+          id="ledgerTile"
+          class="sapUiTinyMargin"
+          header="Ledger"
+          press="onShowLedger">
+          <TileContent id="ledgerTileContent">
+            <ImageContent id="ledgerImageContent" src="sap-icon://ledger"/>
+          </TileContent>
+        </GenericTile>
+
+        <GenericTile
+          id="vendorTile"
+          class="sapUiTinyMargin"
+          header="Vendor Details"
+          press="onShowVendorDetails">
+          <TileContent id="vendorTileContent">
+            <ImageContent id="vendorImageContent" src="sap-icon://supplier"/>
+          </TileContent>
+        </GenericTile>
+
+      </FlexBox>
+
+      <!-- Table Container -->
+      <VBox id="tableVBox" visible="{= ${view1>/pageState} === 'table' }" class="sapUiSmallMargin">
+
+        <!-- Back Button -->
+        <Button
+          id="backButton"
+          text="Back"
+          icon="sap-icon://nav-back"
+          press="onNavBack"
+          class="sapUiSmallMarginBottom" />
+
+        <!-- Ledger Table -->
+        <Table
+          id="ledgerTable"
+          visible="{= ${view1>/selectedTable} === 'ZLEDGERSet' }"
+          items="{ path: 'pagination>/ledgerPageData' }">
+          <columns>
+            <Column><Text text="Vendor"/></Column>
+            <Column><Text text="Name"/></Column>
+            <Column><Text text="Obalance"/></Column>
+            <Column><Text text="Debit"/></Column>
+            <Column><Text text="Credit"/></Column>
+            <Column><Text text="Cbalance"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{pagination>Lifnr}"/>
+                <Text text="{pagination>Name1}"/>
+                <Text text="{pagination>Obalance}"/>
+                <Text text="{pagination>Debit}"/>
+                <Text text="{pagination>Credit}"/>
+                <Text text="{pagination>Cbalance}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+
+        <!-- Vendor Table -->
+        <Table
+          id="vendorTable"
+          visible="{= ${view1>/selectedTable} === 'ZVEND_DETAILSSet' }"
+          items="{ path: 'pagination>/vendorPageData' }">
+          <columns>
+            <Column><Text text="Vendor"/></Column>
+            <Column><Text text="Name"/></Column>
+            <Column><Text text="Address"/></Column>
+            <Column><Text text="GSTIN"/></Column>
+            <Column><Text text="Amount"/></Column>
+            <Column><Text text="Currency"/></Column>
+            <Column><Text text="Status"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{pagination>Lifnr}"/>
+                <Text text="{pagination>Name}"/>
+                <Text text="{pagination>Fulladdress}"/>
+                <Text text="{pagination>STCD1}"/>
+                <Text text="{pagination>Wrbtr}"/>
+                <Text text="{pagination>Waers}"/>
+                <Text text="{pagination>Status}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+
+        <!-- Pagination Buttons -->
+        <HBox
+          visible="{= ${view1>/selectedTable} !== '' }"
+          justifyContent="Center"
+          class="sapUiSmallMarginTop">
+          <Button text="Previous" press="onPrevPage"/>
+          <Text text="{view1>/currentPage} / {view1>/totalPages}" class="sapUiSmallMarginHorizontal"/>
+          <Button text="Next" press="onNextPage"/>
+        </HBox>
+
+      </VBox>
+    </content>
+  </Page>
 </mvc:View>

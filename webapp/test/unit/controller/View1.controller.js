@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"tabtable/controller/View1.controller"
+	"tabtable1/controller/View1.controller"
 ], function (Controller) {
 	"use strict";
 

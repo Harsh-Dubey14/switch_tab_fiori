@@ -1,5 +1,5 @@
 sap.ui.define([
-	"tabtable/test/unit/controller/View1.controller"
+	"tabtable1/test/unit/controller/View1.controller"
 ], function () {
 	"use strict";
 });

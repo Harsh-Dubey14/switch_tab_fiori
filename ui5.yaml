@@ -2,7 +2,7 @@
 
 specVersion: "3.1"
 metadata:
-  name: tabtable
+  name: tabtable1
 type: application
 
 server:
@@ -10,7 +10,7 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertError: true
+        ignoreCertError: falsez
         ui5:
           path:
             - /resources
@@ -19,9 +19,6 @@ server:
         backend:
           - path: /sap
             url: http://103.248.233.172:8003
-            client: "900"                  # ✅ must be string, not number
-            destination: ZVEND_DETAILS_SRV # optional, can remove if not needed
-            scp: false
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

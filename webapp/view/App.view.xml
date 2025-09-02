@@ -1,4 +1,4 @@
-<mvc:View controllerName="tabtable.controller.App"
+<mvc:View controllerName="tabtable1.controller.App"
     displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">

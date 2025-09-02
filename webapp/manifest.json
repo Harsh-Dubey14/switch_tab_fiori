@@ -1,7 +1,7 @@
 {
   "_version": "1.76.0",
   "sap.app": {
-    "id": "tabtable",
+    "id": "tabtable1",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -44,7 +44,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.139.0",
       "libs": {
@@ -60,10 +60,10 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "tabtable.i18n.i18n"
+          "bundleName": "tabtable1.i18n.i18n"
         }
       },
-      "": {
+      "mainService": {
         "dataSource": "mainService",
         "preload": true,
         "settings": {}
@@ -84,9 +84,9 @@
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
-        "path": "tabtable.view",
+        "path": "tabtable1.view",
         "async": true,
-        "viewPath": "tabtable.view"
+        "viewPath": "tabtable1.view"
       },
       "routes": [
         {
@@ -105,7 +105,7 @@
       }
     },
     "rootView": {
-      "viewName": "tabtable.view.App",
+      "viewName": "tabtable1.view.App",
       "type": "XML",
       "id": "App",
       "async": true
